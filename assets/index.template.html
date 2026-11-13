@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smritikotha — A Night in Red · Trailer Production Breakdown</title>
+<meta name="description" content="Shot-by-shot reverse-engineering of the Smritikotha 'A Night in Red' wedding trailer: production method per shot, cast, lighting, editing, sound, and a remake plan.">
+<style>__CSS__</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="chrome">
+  <div class="chrome__bar">
+    <div class="brand">
+      <span class="brand__mark">rea-video</span>
+      <span class="brand__title">A Night in Red — trailer breakdown</span>
+    </div>
+    <nav class="nav" id="nav" aria-label="Sections"></nav>
+    <div class="chrome__search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+      <input type="search" id="search" placeholder="Search shots, cast, scenes…" autocomplete="off" aria-label="Search" aria-controls="search-results" aria-expanded="false">
+      <kbd>/</kbd>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+  <div class="progress"><div class="progress__bar" id="progress-bar"></div></div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="hero" id="overview">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <div class="section__eyebrow">Trailer forensics</div>
+        <h1 class="hero__title">Smritikotha — <em>A Night in Red</em></h1>
+        <p class="hero__sub" id="hero-sub"></p>
+        <div class="hero__facts" id="hero-facts"></div>
+      </div>
+      <figure class="hero__film">
+        <img id="hero-strip" alt="Contact sheet of all 58 shots in the trailer, in running order">
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="verdict">
+    <div class="verdict">
+      <div class="verdict__main">
+        <div class="verdict__label">Production verdict</div>
+        <p class="verdict__text" id="verdict-text"></p>
+        <div class="mix" id="mix-bar" role="img" aria-label="Share of runtime by production method"></div>
+        <div class="mix__legend" id="mix-legend"></div>
+      </div>
+      <aside class="verdict__side" id="verdict-stats"></aside>
+    </div>
+  </section>
+
+  <section class="section" id="shot-map">
+    <div class="section__head">
+      <div class="section__eyebrow">Structure</div>
+      <h2 class="section__title">Shot map</h2>
+      <p class="section__lede">Every cut in the trailer, positioned on the runtime. Colour encodes the production method; gold marks the music bed's entry and the graphic end cards.</p>
+    </div>
+    <div class="timeline" id="timeline-strip" role="img" aria-label="Timeline of all shots"></div>
+    <div class="timeline__axis"><span>0:00</span><span>0:35</span><span>1:10</span><span>1:45</span><span>2:19</span></div>
+  </section>
+
+  <section class="section" id="shots">
+    <div class="section__head">
+      <div class="section__eyebrow">58 shots</div>
+      <h2 class="section__title">Shot explorer</h2>
+      <p class="section__lede">Each shot's production method, framing, camera support, lighting and the evidence behind it. Click a row for the full read plus generation prompts.</p>
+    </div>
+
+    <div class="filters">
+      <div class="filters__row" id="filter-labels"></div>
+      <div class="filters__row">
+        <select class="select" id="filter-scene" aria-label="Filter by location"></select>
+        <select class="select" id="filter-size" aria-label="Filter by shot size"></select>
+        <select class="select" id="filter-camera" aria-label="Filter by camera support"></select>
+        <select class="select" id="filter-light" aria-label="Filter by lighting setup"></select>
+        <span class="filters__spacer"></span>
+        <span class="result-count" id="result-count"></span>
+        <button class="btn" id="reset-filters" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div class="shots">
+      <div class="shots__head" aria-hidden="true">
+        <div>#</div><div>Time</div><div>Shot</div><div>Method</div><div>Size</div><div>Camera</div><div></div>
+      </div>
+      <div id="shot-list"></div>
+    </div>
+  </section>
+
+  <section class="section" id="cast">
+    <div class="section__head">
+      <div class="section__eyebrow">Cast &amp; locations</div>
+      <h2 class="section__title">Characters, scenes, props</h2>
+      <p class="section__lede">The recurring cast and the twelve locations the trailer moves through — each character needs one fixed reference image to reproduce across every shot.</p>
+    </div>
+    <div class="grid grid--3" id="characters"></div>
+    <h3 class="section__title" style="font-size:19px;margin:30px 0 14px">Scenes</h3>
+    <div class="grid grid--2" id="scenes"></div>
+    <h3 class="section__title" style="font-size:19px;margin:30px 0 14px">Props</h3>
+    <div class="grid grid--4" id="props"></div>
+  </section>
+
+  <section class="section" id="sound">
+    <div class="section__head">
+      <div class="section__eyebrow">Sound</div>
+      <h2 class="section__title">Music, voice, effects</h2>
+      <p class="section__lede">The trailer carries no narration. What it does carry is a single post-laid music bed — and the source of that bed is the one thing this analysis cannot settle from the audio alone.</p>
+    </div>
+    <div class="grid grid--2" id="audio-cards"></div>
+    <div class="card card--pad" style="margin-top:14px">
+      <div class="bpm">
+        <span class="bpm__n" id="bpm-n"></span>
+        <span class="bpm__l" id="bpm-l"></span>
+      </div>
+      <img class="wave" id="audio-wave" alt="Audio waveform timeline: music bed segments, beat grid and silence gaps">
+      <div class="musicsegs" id="music-segs" style="margin-top:14px"></div>
+    </div>
+  </section>
+
+  <section class="section" id="packaging">
+    <div class="section__head">
+      <div class="section__eyebrow">Packaging</div>
+      <h2 class="section__title">Overlays, stickers, typography</h2>
+      <p class="section__lede">What sits on top of the picture. The tool's automatic sticker detector fired three times; all three were false positives, confirmed by eye.</p>
+    </div>
+    <div class="grid grid--2" id="stickers"></div>
+    <div class="note note--red" id="packaging-note" style="margin-top:14px"></div>
+  </section>
+
+  <section class="section" id="craft">
+    <div class="section__head">
+      <div class="section__eyebrow">Craft</div>
+      <h2 class="section__title">Camera, light, grade, edit</h2>
+      <p class="section__lede">The measured numbers come from the pixels; the prose comes from watching the frames. Where they disagree, the disagreement is the interesting part.</p>
+    </div>
+    <div class="grid grid--2" id="aspects"></div>
+  </section>
+
+  <section class="section" id="remake">
+    <div class="section__head">
+      <div class="section__eyebrow">Remake</div>
+      <h2 class="section__title">Shooting plan</h2>
+      <p class="section__lede">The trailer is real footage, so the remake is a shoot, not a generation. Nine set-ups grouped into seven scenes, with framing, camera support and lighting per set-up.</p>
+    </div>
+    <div class="grid" id="shoot-plan" style="gap:12px"></div>
+    <div class="note" id="remake-note" style="margin-top:16px"></div>
+  </section>
+
+  <section class="section" id="confidence">
+    <div class="section__head">
+      <div class="section__eyebrow">Uncertainty</div>
+      <h2 class="section__title">What is still open</h2>
+      <p class="section__lede">Every conclusion here has a source. These are the ones that do not have one yet.</p>
+    </div>
+    <div class="grid grid--2" id="open-questions"></div>
+  </section>
+
+  <footer class="footer">
+    <span>Generated by <code>rea-video v0.1.0</code></span>
+    <span id="foot-source"></span>
+    <span id="foot-review"></span>
+  </footer>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox__close" id="lb-close" aria-label="Close">&#10005;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+  <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Next">&#8250;</button>
+  <figure class="lightbox__fig">
+    <img class="lightbox__img" id="lb-img" alt="">
+    <figcaption class="lightbox__cap" id="lb-cap"></figcaption>
+  </figure>
+</div>
+
+<script id="artifact-data" type="application/json">__DATA__</script>
+<script>__JS__</script>
+</body>
+</html>

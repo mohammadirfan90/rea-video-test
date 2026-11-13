@@ -1,0 +1,40 @@
+# --- source video / audio: never committed, never deployed -------------
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.ogg
+media/stems/
+
+# --- secrets -------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- build & verify scratch ---------------------------------------------
+node_modules/
+/shots/            # verifier screenshots at repo root only — media/shots/ is real content
+build.log
+verify.log
+*.log
+
+# --- pipeline scratch ----------------------------------------------------
+out/
+tools/*.bak
+tools/__pycache__/
+__pycache__/
+
+# --- os / editor ---------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
